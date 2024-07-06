@@ -1,0 +1,407 @@
+/* Réinitialisation de base pour le style */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    overflow: auto; /* Permet le défilement */
+    background-color: #000000;
+    color: #ffffff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh; /* Assure que la hauteur minimale est de 100% de la vue */
+    padding-top: 100px; /* Padding pour pousser le contenu vers le bas */
+}
+
+header {
+    background-color: #2aa01f;
+    color: #ffffff;
+    padding: 10px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    transition: background-color 0.3s ease-in-out;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Curseur personnalisé */
+.cursor {
+    width: 20px;
+    height: 20px;
+    border: 2px solid limegreen;
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    z-index: 10000;
+    cursor: pointer;
+}
+
+.cursor::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background-color: limegreen;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Animation pour le curseur */
+@keyframes cursorClick {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(0.8);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Assurez-vous que les autres éléments de la page ne redéfinissent pas le curseur */
+a, button {
+    cursor: pointer; /* Définir le curseur par défaut pour les liens et les boutons */
+}
+
+a:hover ~ .cursor,
+button:hover ~ .cursor {
+    width: 30px;
+    height: 30px;
+    border-width: 4px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+}
+
+.logo img {
+    width: 50px;
+    height: auto;
+    margin-right: 10px;
+}
+
+.brand-name {
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.logo img:hover {
+    transform: rotate(360deg);
+}
+
+nav {
+    flex-grow: 1;
+}
+
+nav ul.menu {
+    list-style-type: none;
+    text-align: center;
+}
+
+nav ul.menu > li {
+    display: inline-block;
+    position: relative;
+    margin-right: 20px;
+}
+
+nav ul.menu > li > a {
+    display: block;
+    padding: 15px 20px;
+    color: #ffffff;
+    text-decoration: none;
+    transition: background-color 0.3s, padding 0.3s;
+}
+
+nav ul.menu > li > a:hover {
+    background-color: #2aa01f;
+    padding-left: 25px;
+    padding-right: 15px;
+}
+
+/* Dropdown amélioré */
+.dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 200px;
+    background-color: #000000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px) scale(0.95);
+    transition: opacity 0.3s, visibility 0s, transform 0.3s;
+    z-index: 1000;
+}
+
+.dropdown ul.submenu {
+    list-style-type: none;
+    padding: 10px 0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.dropdown ul.submenu li {
+    text-align: left;
+}
+
+.dropdown a {
+    display: block;
+    padding: 12px 20px;
+    color: #ffffff;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.dropdown a:hover {
+    background-color: #2aa01f;
+}
+
+/* Affichage du dropdown au survol */
+nav ul.menu > li:hover .dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+}
+
+nav ul.menu > li:hover .dropdown ul.submenu {
+    opacity: 1;
+}
+
+/* Animation de titre */
+nav ul.menu > li > a::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background-color: #ffffff;
+    transition: width 0.3s;
+}
+
+nav ul.menu > li > a:hover::after {
+    width: 100%;
+}
+
+/* Animation de fondu */
+.animated-text {
+    font-size: 24px;
+    font-weight: bold;
+    white-space: pre-wrap;
+    overflow: hidden;
+}
+
+.line-by-line {
+    overflow: hidden;
+    position: relative;
+    white-space: nowrap;
+}
+
+.line-by-line span {
+    display: inline-block;
+    opacity: 0;
+    animation: fadeIn 1s ease forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+/* Boutons sociaux */
+.social-buttons {
+    max-width: 400px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 50px;
+    margin: 50px auto 0;
+}
+
+.social-button {
+    width: 50px;
+    height: 50px;
+    background-size: cover;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 0 20px;
+}
+
+/* Panneau d'informations */
+.info {
+    background-color: #000000;
+    max-width: 300px;
+    margin: 40px auto; /* Ajustement de la marge ici */
+    padding: 20px;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.info h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.info ul {
+    padding: 0;
+    list-style-type: none;
+}
+
+.info ul li {
+    margin-bottom: 10px;
+}
+
+.info a {
+    color: #1e90ff; /* Couleur des liens */
+    text-decoration: none;
+}
+
+.info a:hover {
+    text-decoration: underline;
+}
+
+/* Styles des modales */
+.modal {
+    display: none; /* Masque la modal par défaut */
+    position: fixed; /* Positionne la modal par rapport à la fenêtre */
+    z-index: 1000; /* Assure que la modal est au-dessus des autres éléments */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent pour masquer le contenu de fond */
+}
+
+.modal-content {
+    position: relative;
+    margin: 10% auto; /* Centrer verticalement */
+    padding: 20px;
+    width: 80%;
+    max-width: 600px; /* Largeur maximale pour un bon affichage */
+    background-color: white;
+    border-radius: 8px;
+    z-index: 1001; /* Assure que le contenu de la modal est au-dessus du fond */
+    color: #000;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.form-container {
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    width: 80%;
+    max-width: 700px;
+    overflow-y: auto;
+    max-height: 90%;
+    z-index: 10;
+    margin-top: 50px; /* Added margin-top for spacing */
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #4CAF50;
+}
+
+p {
+    text-align: justify;
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+input, textarea, select {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: #fff;
+    color: #000;
+}
+
+button {
+    width: 100%;
+    padding: 15px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.hidden {
+    display: none;
+}
+
+.pagination {
+    display: flex;
+    justify-content: space-between;
+}
+
+.pagination button {
+    width: 48%;
+}
+
+.error {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+footer {
+    background-color: #2aa01f;
+    color: #000000;
+    text-align: center;
+    padding: 15px 0;
+}
+
+.footer-container {
+    width: 100vw;
+    max-width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center; /* Centrer horizontalement */
+    align-items: center; /* Centrer verticalement */
+    flex-direction: column; /* Aligner les éléments verticalement */
+}

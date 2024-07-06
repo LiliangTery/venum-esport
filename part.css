@@ -1,0 +1,361 @@
+/* Reset de base pour le style */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #000000;
+}
+
+header {
+    background-color: #2aa01f; /* Couleur de fond */
+    color: #ffffff;
+    padding: 10px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000; /* Assure que le menu reste au-dessus du contenu */
+    transition: background-color 0.3s ease-in-out;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Ombre légère */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+/* Curseur personnalisé */
+.cursor {
+width: 20px;
+height: 20px;
+border: 2px solid limegreen;
+border-radius: 50%;
+position: fixed;
+pointer-events: none;
+transform: translate(-50%, -50%);
+z-index: 10000;
+cursor: pointer;
+}
+
+.cursor::before {
+content: '';
+width: 8px;
+height: 8px;
+background-color: limegreen;
+border-radius: 50%;
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+}
+
+/* Animation pour le curseur */
+@keyframes cursorClick {
+0% {
+transform: scale(1);
+}
+50% {
+transform: scale(0.8);
+}
+100% {
+transform: scale(1);
+}
+}
+
+/* Assurez-vous que les autres éléments de la page ne redéfinissent pas le curseur */
+a, button {
+cursor: pointer; /* Définir le curseur par défaut pour les liens et les boutons */
+}
+
+a:hover ~ .cursor,
+button:hover ~ .cursor {
+width: 30px;
+height: 30px;
+border-width: 4px;
+}
+.logo {
+    display: flex; /* Utilisation de flexbox pour aligner le logo et le texte */
+    align-items: center; /* Centre les éléments verticalement */
+    margin-left: 20px; /* Espacement du logo par rapport au bord gauche */
+}
+
+.logo img {
+    width: 50px; /* Taille du logo */
+    height: auto;
+    margin-right: 10px; /* Espacement entre le logo et le texte */
+}
+
+.brand-name {
+    color: #ffffff; /* Couleur du texte */
+    font-weight: bold; /* Gras */
+    font-size: 18px; /* Taille de police */
+}
+
+.logo img:hover {
+    transform: rotate(360deg); /* Rotation complète au survol */
+}
+
+nav {
+    flex-grow: 1; /* Le menu occupe tout l'espace disponible */
+}
+
+nav ul.menu {
+    list-style-type: none;
+    text-align: center;
+}
+
+nav ul.menu > li {
+    display: inline-block;
+    position: relative;
+    margin-right: 20px;
+}
+
+nav ul.menu > li > a {
+    display: block;
+    padding: 15px 20px;
+    color: #ffffff;
+    text-decoration: none;
+    transition: background-color 0.3s, padding 0.3s;
+}
+
+nav ul.menu > li > a:hover {
+    background-color: #2aa01f; /* Fond sombre au survol */
+    padding-left: 25px; /* Agrandissement du padding à gauche */
+    padding-right: 15px; /* Ajustement du padding à droite */
+}
+
+/* Dropdown amélioré */
+.dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 200px;
+    background-color: #000000; /* Fond du dropdown */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre légère */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px) scale(0.95);
+    transform-origin: top;
+    transition: opacity 0.3s, visibility 0s, transform 0.3s;
+    z-index: 1000; /* Au-dessus du menu principal */
+}
+
+.dropdown ul.submenu {
+    list-style-type: none;
+    padding: 10px 0;
+    opacity: 0; /* Initiallement invisible */
+    transition: opacity 0.3s ease;
+}
+
+.dropdown ul.submenu li {
+    text-align: left;
+}
+
+.dropdown a {
+    display: block;
+    padding: 12px 20px;
+    color: #ffffff;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.dropdown a:hover {
+    background-color: #2aa01f; /* Fond sombre au survol */
+}
+
+/* Affichage du dropdown au survol */
+nav ul.menu > li:hover .dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+}
+
+nav ul.menu > li:hover .dropdown ul.submenu {
+    opacity: 1; /* Affiche le sous-menu */
+}
+
+/* Animation de titre */
+nav ul.menu > li > a::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background-color: #ffffff;
+    transition: width 0.3s;
+}
+
+nav ul.menu > li > a:hover::after {
+    width: 100%;
+}
+
+/* Animation de fondu */
+.animated-text {
+    font-size: 24px;
+    font-weight: bold;
+    white-space: pre-wrap; /* Pour gérer les sauts de ligne */
+    overflow: hidden;
+}
+
+.line-by-line {
+    overflow: hidden;
+    position: relative;
+    white-space: nowrap;
+}
+
+.line-by-line span {
+    display: inline-block;
+    opacity: 0;
+    animation: fadeIn 1s ease forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+/* Social Media Buttons Section */
+.social-buttons {
+    max-width: 400px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 50px;
+    margin: 50px auto 0;
+}
+
+.social-button {
+    width: 50px;
+    height: 50px;
+    background-size: cover;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 0 20px;
+}
+
+/* Information Panel */
+.info {
+background-color: #000000; /* Couleur de fond pour le panneau d'informations */
+color: #fff;
+padding: 20px;
+text-align: center;
+}
+
+.info h2 {
+margin-bottom: 10px;
+}
+
+.info ul {
+list-style: none;
+padding: 0;
+}
+
+.info li {
+margin: 5px 0;
+}
+
+.info a {
+color: #1e90ff; /* Couleur des liens */
+text-decoration: none;
+}
+
+.info a:hover {
+text-decoration: underline;
+}
+
+/* General Styles for Modal Links */
+.modal-link {
+cursor: pointer;
+}
+
+/* Styles pour les modales */
+.modal {
+display: none; /* Caché par défaut */
+position: fixed; /* Reste en place */
+z-index: 1; /* Au-dessus de tout le contenu */
+left: 0;
+top: 0;
+width: 100%; /* Largeur complète */
+height: 100%; /* Hauteur complète */
+overflow: auto; /* Activer le défilement si nécessaire */
+background-color: rgb(0,0,0); /* Couleur de fond */
+background-color: rgba(0,0,0,0.4); /* Couleur de fond avec transparence */
+}
+
+.modal-content {
+background-color: #fefefe;
+margin: 15% auto; /* 15% à partir du haut et centré */
+padding: 20px;
+border: 1px solid #888;
+width: 80%; /* Largeur de 80% */
+}
+
+.close {
+color: #aaa;
+float: right;
+font-size: 28px;
+font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+color: black;
+text-decoration: none;
+cursor: pointer;
+}
+
+footer {
+    background-color: #2aa01f;
+    color: #000000;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 48px;
+    position: relative;
+    z-index: 1;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+/* Styles pour la section des partenaires */
+.partner-section {
+    background-color: #000000;
+    padding: 20px;
+    margin-bottom: 20px;
+    text-align: center; /* Centrer le contenu horizontalement */
+    margin-top: 70px; /* Augmentez la marge supérieure pour déplacer vers le bas */
+}
+
+.partner-section h2 {
+    font-size: 24px;
+    color: #2aa01f;
+    margin-bottom: 10px;
+}
+
+.partner-description {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #ffffff;
+}
+
+.partner-logo {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.partner-logo img {
+    max-width: 200px; /* Ajustez la taille du logo selon vos besoins */
+    display: block; /* Pour centrer l'image horizontalement */
+    margin: 0 auto; /* Pour centrer l'image horizontalement */
+}
+
+/* Espacement entre les sections */
+.partner-section + .partner-section {
+    margin-top: 40px;
+}
+
+/* Marges supplémentaires pour déplacer plus bas */
+header {
+    margin-bottom: 50px;
+}
+
